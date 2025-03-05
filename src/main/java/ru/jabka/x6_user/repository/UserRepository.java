@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import ru.jabka.x6_user.exception.BadRequestException;
 import ru.jabka.x6_user.model.UserRequest;
 import ru.jabka.x6_user.model.UserResponse;
-import ru.jabka.x6_user.repository.maper.UserMaper;
+import ru.jabka.x6_user.repository.maper.UserMapper;
 
 @Repository
 @RequiredArgsConstructor
@@ -49,33 +49,32 @@ public class UserRepository {
             """;
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
-    private final UserMaper x6UserMaper;
+    private final UserMapper userMapper;
 
-    public UserResponse createUser(final UserRequest x6UserRequest) {
-        return jdbcTemplate.queryForObject(INSERT, userToSql(null, x6UserRequest), x6UserMaper);
+    public UserResponse insert(final UserRequest userRequest) {
+        return jdbcTemplate.queryForObject(INSERT, userToSql(null, userRequest), userMapper);
     }
 
-    public Boolean isExistUser(final Long userId) {
-        return jdbcTemplate.queryForObject(EXISTS, userToSql(userId, null), Boolean.class);
+    public UserResponse update(final Long id, final UserRequest userRequest) {
+        return jdbcTemplate.queryForObject(UPDATE, userToSql(id, userRequest), userMapper);
     }
 
-    public UserResponse updateUser(final Long userId, final UserRequest x6UserRequest) {
-        return jdbcTemplate.queryForObject(UPDATE, userToSql(userId, x6UserRequest), x6UserMaper);
+    public Boolean exist(final Long id) {
+        return jdbcTemplate.queryForObject(EXISTS, userToSql(id, null), Boolean.class);
     }
 
-    public UserResponse getUserById(final Long userId) {
+    public UserResponse getUserById(final Long id) {
         try {
-            return jdbcTemplate.queryForObject(GET_BY_ID, userToSql(userId, null), x6UserMaper);
+            return jdbcTemplate.queryForObject(GET_BY_ID, userToSql(id, null), userMapper);
         } catch (Exception e){
-            throw new BadRequestException(String.format("Не удалось найти пользователя с id = %d", userId));
+            throw new BadRequestException(String.format("Не удалось найти пользователя с id = %d", id));
         }
     }
 
-    private MapSqlParameterSource userToSql(final Long userId, final UserRequest x6UserRequest){
+    private MapSqlParameterSource userToSql(final Long id, final UserRequest x6UserRequest){
         final MapSqlParameterSource params = new MapSqlParameterSource();
 
-        params.addValue("id", userId);
-
+        params.addValue("id", id);
         if (x6UserRequest != null) {
             params.addValue("name", x6UserRequest.getName());
             params.addValue("email", x6UserRequest.getEmail());

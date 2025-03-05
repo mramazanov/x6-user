@@ -3,6 +3,7 @@ package ru.jabka.x6_user.exception;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 import ru.jabka.x6_user.model.ApiError;
 
 @RestControllerAdvice
