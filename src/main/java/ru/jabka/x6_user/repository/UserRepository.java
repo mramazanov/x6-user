@@ -16,28 +16,16 @@ import ru.jabka.x6_user.repository.maper.UserMapper;
 public class UserRepository {
 
     private static final String INSERT = """
-            WITH insert_user AS (
-                INSERT INTO x6user.user (name, email)
-                VALUES (:name, :email)
-                RETURNING *
-            ), insert_meta_user_creation AS (
-                INSERT INTO x6user.meta_user_create (id, create_date)
-                (SELECT insert_user.id, now() FROM insert_user)
-            )
-            SELECT * FROM insert_user;
+            INSERT INTO x6user.user (name, email, create_date)
+            VALUES (:name, :email, now())
+            RETURNING *
             """;
 
     private static final String UPDATE = """
-            WITH update_user AS (
                 UPDATE x6user.user
-                SET name = :name, email = :email
+                SET name = :name, email = :email, update_date = now()
                 WHERE id = :id
                 RETURNING *
-            ), insert_meta_user_update AS (
-                INSERT INTO x6user.meta_user_update (user_id, update_date)
-                (SELECT update_user.id, now() FROM update_user)
-            )
-            SELECT * FROM update_user;
             """;
 
     private static final String EXISTS = """

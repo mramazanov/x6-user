@@ -33,7 +33,7 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    @Cacheable(value = "user", key = "#id")
+    @Cacheable(value = "userExist", key = "#id")
     public Boolean exist(final Long id) {
         return userRepository.exist(id);
     }
@@ -55,5 +55,4 @@ public class UserService {
             throw new BadRequestException("Укажите почту пользователя");
         }
     }
-
 }
