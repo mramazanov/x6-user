@@ -42,7 +42,7 @@ public class RedisConfiguration {
                         )
                 )
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(
-                        new Jackson2JsonRedisSerializer<>(cacheObjectMapper, UserResponse.class)
+                        new Jackson2JsonRedisSerializer<>(cacheObjectMapper, Boolean.class)
                 ))
                 .disableCachingNullValues();
 
