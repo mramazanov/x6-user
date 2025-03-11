@@ -1,11 +1,9 @@
 package ru.jabka.x6_user.repository;
 
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import ru.jabka.x6_user.exception.BadRequestException;
 import ru.jabka.x6_user.model.UserRequest;
 import ru.jabka.x6_user.model.UserResponse;

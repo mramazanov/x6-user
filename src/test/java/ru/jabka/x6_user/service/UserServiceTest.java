@@ -4,12 +4,10 @@ package ru.jabka.x6_user.service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import ru.jabka.x6_user.exception.BadRequestException;
 import ru.jabka.x6_user.model.UserRequest;
 import ru.jabka.x6_user.model.UserResponse;

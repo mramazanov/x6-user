@@ -1,13 +1,11 @@
 package ru.jabka.x6_user.service;
 
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-
 import ru.jabka.x6_user.exception.BadRequestException;
 import ru.jabka.x6_user.model.UserRequest;
 import ru.jabka.x6_user.model.UserResponse;
