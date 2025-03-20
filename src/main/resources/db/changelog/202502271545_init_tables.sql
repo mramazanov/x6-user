@@ -1,0 +1,9 @@
+CREATE SCHEMA x6user;
+
+CREATE TABLE x6user.user (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR NOT NULL,
+    email VARCHAR UNIQUE NOT NULL,
+    create_date TIMESTAMP WITH TIME ZONE,
+    update_date TIMESTAMP WITH TIME ZONE
+);
